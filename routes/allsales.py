@@ -22,7 +22,8 @@ def get_allsales():
                 eu_sales, 
                 jp_sales, 
                 other_sales, 
-                global_sales 
+                global_sales,
+                genre
             FROM vgsales ORDER BY name ASC LIMIT 100
         """)
     rows = cursor.fetchall()
@@ -41,9 +42,10 @@ def get_allsales():
                 "na_sales": row[4],
                 "eu_sales": row[5],
                 "jp_sales": row[6],
-                "other_sales": row[7],  # Added missing field
-                "global_sales": row[8]  # Included global sales
-            }
+                "other_sales": row[7],
+                "global_sales": row[8],
+            },
+            "genre": row[9]
         }
         nested_sales.append(game_data)  # Moved inside the loop
 
