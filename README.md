@@ -1,5 +1,5 @@
 # FastAPI Backend - Video Game Sales API
-
+![homepage image](/static/page.png)
 This is the backend service for the **Video Game Sales** project, built using **FastAPI**.
 
 ## 🚀 Features
