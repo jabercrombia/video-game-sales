@@ -4,7 +4,7 @@ from itertools import groupby
 
 router = APIRouter()
 
-# return all films
+# return all sales
 @router.get("/allsales/")
 def get_allsales():
     conn = get_db_connection()
@@ -24,7 +24,20 @@ def get_allsales():
                 other_sales, 
                 global_sales,
                 genre
-            FROM vgsales ORDER BY name ASC LIMIT 100
+            FROM vgsales
+            WHERE year IS NOT NULL
+                AND year ~ '^[0-9]+$'  -- Regex: Only numeric years
+                AND global_sales::NUMERIC IS NOT NULL
+                AND global_sales::NUMERIC > 0
+                AND na_sales::NUMERIC IS NOT NULL
+                AND na_sales::NUMERIC > 0
+                AND jp_sales::NUMERIC IS NOT NULL
+                AND jp_sales::NUMERIC > 0
+                AND eu_sales::NUMERIC IS NOT NULL
+                AND eu_sales::NUMERIC > 0
+                AND other_sales::NUMERIC IS NOT NULL
+                AND other_sales::NUMERIC > 0 
+            ORDER BY name ASC
         """)
     rows = cursor.fetchall()
     cursor.close()
