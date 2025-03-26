@@ -43,4 +43,4 @@ def get_highest_total_sales(
     if not rows:
         raise HTTPException(status_code=404, detail="No data found")
 
-    return [{column_name: row[0], "total_sales": row[1]} for row in rows]
+    return [{column_name: row[0].replace('-','_').replace(' ','_'), "total_sales": row[1]} for row in rows]
